@@ -1,20 +1,10 @@
 from crewai.flow import Flow, listen, start
-from pydantic import BaseModel
 
 from resume_opt.crews.for_ats_compliance.crew import \
     ResumeOptimizationForATSCompliance
 from resume_opt.crews.for_job_posting.crew import \
     ResumeOptimizationForJobPostings
-
-
-def read_file(path: str) -> str:
-    with open(path, "r") as f:
-        return f.read()
-
-
-class ResumeOptimizationState(BaseModel):
-    resume_contents: str = ""
-    job_posting_contents: str = ""
+from resume_opt.models import ResumeOptimizationState
 
 
 class ResumeOptimizationFlow(Flow[ResumeOptimizationState]):

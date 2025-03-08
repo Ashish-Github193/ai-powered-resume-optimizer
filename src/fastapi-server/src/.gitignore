@@ -1,0 +1,11 @@
+__pycache__/
+lib/
+.DS_Store
+
+# Environments
+.venv
+.env
+
+# Shared
+shared/uploads/*
+shared/outputs/*

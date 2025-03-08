@@ -16,7 +16,7 @@ app = FastAPI(
 )
 
 
-@app.post("/api/resumes/optimization")
+@app.post("/resumes/optimization")
 async def resume_optimization(data: ResumeOptimizationRequest = Body(...)):
     try:
         flow = ResumeOptimizationFlow(inputs=data.model_dump())
