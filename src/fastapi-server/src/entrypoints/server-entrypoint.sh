@@ -15,13 +15,9 @@ echo "> Done"
 echo "..."
 
 echo "> ============================="
-echo "> Change owner for shared folder"
-echo "> ============================="
-sudo chown appuser:appuser /home/appuser/shared
-echo "> Done"
-echo "..."
-
-echo "> ============================="
 echo "> Starting FastAPI Server"
 echo "> ============================="
-exec uvicorn resume_opt.main:app --host 0.0.0.0 --port 5000 --workers 1
+python="/home/appuser/venv/bin/python"
+uvicorn="/home/appuser/venv/bin/uvicorn"
+
+$python $uvicorn app.main:app --host 0.0.0.0 --port 5000 --workers 1

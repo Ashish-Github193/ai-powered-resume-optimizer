@@ -1,9 +1,5 @@
 import os
 
-from sqlalchemy.orm import declarative_base
-
-Base = declarative_base()
-
 SECRET_KEY = "f7559150d081d1ec4e3e5e8e3b77baa3a23a58a52fbdc9b96ffb8110d31b573bcde02a9a2288b4ead72fdc2c79d3cfb9f46e74ebd0ae9ff4c4a55f34490fe1cefb02fb8ac162a5d58e2b14845e2031b94a03f83e9bd5c1bf82b0eb14d652846f23cce9e7"
 HASHING_ALGORITHM = "HS256"
 

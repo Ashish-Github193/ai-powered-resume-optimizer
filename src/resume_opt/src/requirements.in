@@ -1,3 +1,5 @@
 crewai
 pip-tools
 loguru
+fastapi
+uvicorn

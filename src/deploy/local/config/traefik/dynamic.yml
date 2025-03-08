@@ -1,0 +1,37 @@
+http:
+  routers:
+    fastapi-router:
+      rule: Host(`fastapi.docker.localhost`)
+      service: fastapi-service
+      middlewares:
+        - rate-limit-middleware
+
+    resume-opt-router:
+      rule: Host(`opt.docker.localhost`)
+      service: resume-opt-service
+      middlewares:
+        - rate-limit-middleware
+
+  middlewares:
+    rate-limit-middleware:
+      rateLimit:
+        average: 10
+        period: 1s
+        burst: 3
+
+    basic-login-pass-middleware:
+      basicAuth:
+        users:
+          - "admin:$2a$12$rpB.7eUBJIIQX6fAQYSYxO/CFMRdcNO5nSnFojL4sIYKfT77Oo/m6"
+
+  services:
+    fastapi-service:
+      loadBalancer:
+        servers:
+          - url: http://fastapi-server:5000
+
+    resume-opt-service:
+      loadBalancer:
+        servers:
+          - url: http://resume-opt-server:5000
+

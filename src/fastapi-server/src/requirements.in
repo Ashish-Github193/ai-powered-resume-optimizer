@@ -4,3 +4,5 @@ loguru
 pydantic
 pip-tools
 aiofiles
+python-multipart
+httpx
