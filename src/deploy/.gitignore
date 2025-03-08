@@ -1,3 +1,5 @@
-.envs/*
+# Ignore everything in this directory
+**/envs/*
 
-./data/main/shared/*
+# Ignore the volume mounted data directory
+**/data/main/shared/*
