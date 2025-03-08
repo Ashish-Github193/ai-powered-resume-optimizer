@@ -1,0 +1,10 @@
+resume_content_match:
+    description: "Compare the given keywords or instructions with the resume content and rewrite bullet points to align."
+    expected_output: "A revised list of resume bullet points optimized to match the given instructions or keywords {resume_contents}"
+    agent: "resume_content_matcher"
+
+ats_compliance_check:
+    description: "Ensure the resume is ATS-friendly by checking for non-compliant elements and missing sections."
+    expected_output: "A categorized list of issues, including formatting errors, missing sections, and non-ATS-friendly elements. {resume_contents}"
+    agent: "ats_compliance_checker"
+

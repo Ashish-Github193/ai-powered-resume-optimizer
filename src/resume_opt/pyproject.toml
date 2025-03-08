@@ -1,0 +1,36 @@
+[project]
+name = "resume_opt"
+version = "0.1.0"
+description = "resume-opt using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "crewai[tools]>=0.102.0,<1.0.0",
+]
+
+[project.scripts]
+kickoff = "resume_opt.main:kickoff"
+plot = "resume_opt.main:plot"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "flow"
+
+[tool.pyright]
+pythonVersion = "3.10"
+pythonPlatform = "Linux"
+exclude = ["**/{.bzr,.direnv,.eggs,.git,.pytest_cache,.pytype,.ruff_cache,.venv,.vscode,__pypackages__,_build,buck-out,build,dist,node_modules,site-packages,venv}"]
+venvPath = "."
+venv = ".venv"
+typeCheckingMode = "basic"
+
+[tool.black]
+line-length = 79
+
+[tool.isort]
+known_third_party = ["fastapi"]
+known_first_party = ["app"]
+

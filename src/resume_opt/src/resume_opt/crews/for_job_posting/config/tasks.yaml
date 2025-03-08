@@ -1,0 +1,9 @@
+job_posting_analysis:
+    description: "Analyze the given job posting and extract key skills, keywords, and qualifications."
+    expected_output: "A structured list of key skills, keywords, and qualifications extracted from the provided job posting {job_posting_contents}"
+    agent: "job_posting_analyzer"
+
+resume_content_match:
+    description: "Compare the given keywords or instructions with the resume content and rewrite bullet points to align."
+    expected_output: "A revised list of resume bullet points optimized to match the given instructions or keywords {resume_contents}"
+    agent: "resume_content_matcher"
