@@ -1,7 +1,7 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 
-from resume_opt.crews.resume_scoring.models import ResumeScore
+from resume_engine.crews.resume_scoring.models import ResumeScore
 
 
 @CrewBase

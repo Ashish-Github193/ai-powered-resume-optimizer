@@ -18,7 +18,7 @@ RUN python -m venv venv
 RUN venv/bin/pip install pip wheel setuptools --upgrade
 RUN venv/bin/pip install -r requirements.txt && rm -rf ~/.cache/pip
 
-COPY --chown=appuser:appuser resume_opt resume_opt
+COPY --chown=appuser:appuser resume_engine resume_engine
 COPY --chown=appuser:appuser entrypoints/server-entrypoint.sh ./
 
 RUN chmod +x server-entrypoint.sh

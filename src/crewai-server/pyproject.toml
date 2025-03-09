@@ -1,16 +1,16 @@
 [project]
-name = "resume_opt"
+name = "resume_engine"
 version = "0.1.0"
-description = "resume-opt using crewAI"
-authors = [{ name = "Your Name", email = "you@example.com" }]
+description = "resume-engine using crewAI"
+authors = [{ name = "Ashish Kumar Jha", email = "ashishk2004a@gmail.com" }]
 requires-python = ">=3.10,<3.13"
 dependencies = [
-    "crewai[tools]>=0.102.0,<1.0.0",
+    "crewai[tools]>=0.102.0,<1.0.0"
 ]
 
 [project.scripts]
-kickoff = "resume_opt.main:kickoff"
-plot = "resume_opt.main:plot"
+kickoff = "resume_engine.main:kickoff"
+plot = "resume_engine.main:plot"
 
 [build-system]
 requires = ["hatchling"]

@@ -1,11 +1,8 @@
-from crewai.crew import asyncio
 from crewai.flow import Flow, listen, start
-from crewai.flow.persistence.decorators import persist
-from loguru import logger
 
-from resume_opt.crews.area_for_improve.crew import FindAreasForImprovement
-from resume_opt.crews.area_for_improve.models import (Resume,
-                                                      ResumeAnalysisResult)
+from resume_engine.crews.area_for_improve.crew import FindAreasForImprovement
+from resume_engine.crews.area_for_improve.models import (Resume,
+                                                         ResumeAnalysisResult)
 
 
 class ResumeAOIFlowStates(ResumeAnalysisResult):
@@ -85,20 +82,14 @@ class ResumeAOIFlow(Flow[ResumeAOIFlowStates]):  # type: ignore
         self.state.sections_feedback.append(score)  # type: ignore
 
 
-async def kickoff(inputs: dict[str, str]) -> ResumeAnalysisResult:
-    """Kickoff the resume analysis flow"""
-    return await ResumeAOIFlow(inputs=inputs).kickoff_async()
-
-
-def read_file(file_path: str) -> str:
-    """Read a file and return its contents as a string"""
-    with open(file_path, "r") as file:
-        return file.read()
-
-
-if __name__ == "__main__":
-    base_path = "resume_opt/inputs/"
-    resume_content = read_file(base_path + "rresume.md")
-    inputs = {"resume_contents": resume_content}
-    result = asyncio.run(kickoff(inputs))
-    print(result)
+# async def kickoff(inputs: dict[str, str]) -> ResumeAnalysisResult:
+#    """Kickoff the resume analysis flow"""
+#    return await ResumeAOIFlow(inputs=inputs).kickoff_async()
+#
+#
+# if __name__ == "__main__":
+#    base_path = "resume_opt/inputs/"
+#    resume_content = read_file(base_path + "rresume.md")
+#    inputs = {"resume_contents": resume_content}
+#    result = asyncio.run(kickoff(inputs))
+#    print(result)

@@ -1,8 +1,7 @@
-from crewai.crew import asyncio
 from crewai.flow import Flow, start
 
-from resume_opt.crews.resume_scoring.crew import ResumeScoring
-from resume_opt.crews.resume_scoring.models import ResumeScoringResult
+from resume_engine.crews.resume_scoring.crew import ResumeScoring
+from resume_engine.crews.resume_scoring.models import ResumeScoringResult
 
 
 class ResumeScoringFlowStates(ResumeScoringResult):
@@ -56,15 +55,9 @@ async def kickoff(inputs: dict[str, str]) -> ResumeScoringResult:
     return await ResumeScoringFlow(inputs=inputs).kickoff_async()
 
 
-def read_file(file_path: str) -> str:
-    """Read a file and return its contents as a string"""
-    with open(file_path, "r") as file:
-        return file.read()
-
-
-if __name__ == "__main__":
-    base_path = "resume_opt/inputs/"
-    resume_content = read_file(base_path + "rresume.md")
-    inputs = {"resume_contents": resume_content}
-    result = asyncio.run(kickoff(inputs))
-    print(result)
+# if __name__ == "__main__":
+#    base_path = "resume_opt/inputs/"
+#    resume_content = read_file(base_path + "rresume.md")
+#    inputs = {"resume_contents": resume_content}
+#    result = asyncio.run(kickoff(inputs))
+#    print(result)

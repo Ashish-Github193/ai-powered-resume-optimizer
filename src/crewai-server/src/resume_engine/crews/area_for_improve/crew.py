@@ -1,8 +1,8 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 
-from resume_opt.crews.area_for_improve.models import (Resume,
-                                                      ResumeSectionFeedback)
+from resume_engine.crews.area_for_improve.models import (Resume,
+                                                         ResumeSectionFeedback)
 
 
 @CrewBase

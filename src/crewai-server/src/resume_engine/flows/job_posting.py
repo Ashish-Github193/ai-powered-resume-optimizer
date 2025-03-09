@@ -1,8 +1,8 @@
 from crewai.flow import Flow, start
 
-from resume_opt.crews.for_job_posting.crew import \
+from resume_engine.crews.for_job_posting.crew import \
     ResumeOptimizationForJobPostings
-from resume_opt.models import ResumeOptimizationState
+from resume_engine.models import ResumeOptimizationState
 
 
 class ResumeOptimizationForJobPostingFlow(Flow[ResumeOptimizationState]):
@@ -20,16 +20,13 @@ class ResumeOptimizationForJobPostingFlow(Flow[ResumeOptimizationState]):
             self.check_for_ats = inputs["choices"]["check_for_ats"] or False
 
     @start()
-    def optimize_resume_for_job_posting(self) -> None:
+    async def optimize_resume_for_job_posting(self) -> None:
         """Optimize resume for job posting"""
-        result = (
-            ResumeOptimizationForJobPostings()
-            .crew()
-            .kickoff(
-                inputs={
-                    "resume_contents": self.state.resume_contents,
-                    "job_posting_contents": self.state.job_posting_contents,
-                }
-            )
+        crew = ResumeOptimizationForJobPostings().crew()
+        result = await crew.kickoff_async(
+            inputs={
+                "resume_contents": self.state.resume_contents,
+                "job_posting_contents": self.state.job_posting_contents,
+            }
         )
         self.state.resume_contents = result.raw

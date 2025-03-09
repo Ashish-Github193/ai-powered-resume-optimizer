@@ -19,7 +19,7 @@ services:
     environment:
       SHARED_FOLDER: "${SHARED_FOLDER}"
     env_file:
-      - ./envs/.env.resume_opt
+      - ./envs/.env.crewai-server
     user: "1000:1000"
     volumes:
       - resume-opt-shared:/home/appuser/shared
@@ -37,7 +37,7 @@ services:
       - fastapi-shared:/home/appuser/shared
     depends_on:
       - traefik
-      - resume-opt-server
+      - crewai-server
     networks:
       - main-network
 
