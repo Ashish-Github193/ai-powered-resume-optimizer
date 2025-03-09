@@ -3,3 +3,4 @@ pip-tools
 loguru
 fastapi
 uvicorn
+pydantic[email]

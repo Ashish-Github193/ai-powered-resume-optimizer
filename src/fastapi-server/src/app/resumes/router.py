@@ -70,8 +70,9 @@ async def resume_optimization(
             response = await client.post(
                 API_CONFIG_RESUME_OPTIMIZATION_URL,
                 json={
-                    "resume_content": resume_content.decode("utf-8"),
-                    "job_posting": job_posting.decode("utf-8"),
+                    "resume_content": resume_content,
+                    "job_posting": job_posting,
+                    "choices": request.choices.model_dump(),
                 },
                 timeout=60.0,
             )
@@ -85,9 +86,7 @@ async def resume_optimization(
         resume_content_file_path = os.path.join(
             OUTPUT_FOLDER, resume_content_filename
         )
-        await async_file_write(
-            resume_content_file_path, resume_content.encode("utf-8")
-        )
+        await async_file_write(resume_content_file_path, resume_content)
         return FileResponse(
             resume_content_file_path,
             filename=resume_content_filename,

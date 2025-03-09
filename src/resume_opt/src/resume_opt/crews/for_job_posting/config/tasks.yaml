@@ -5,5 +5,5 @@ job_posting_analysis:
 
 resume_content_match:
     description: "Compare the given keywords or instructions with the resume content and rewrite bullet points to align."
-    expected_output: "A revised list of resume bullet points optimized to match the given instructions or keywords {resume_contents}"
+    expected_output: "A revised list of resume bullet points optimized to match the given instructions or keywords. Additionally make sure to categorize skills. {resume_contents}"
     agent: "resume_content_matcher"

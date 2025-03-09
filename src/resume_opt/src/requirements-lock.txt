@@ -89,10 +89,14 @@ distro==1.9.0
     # via
     #   openai
     #   posthog
+dnspython==2.7.0
+    # via email-validator
 docstring-parser==0.16
     # via instructor
 durationpy==0.9
     # via kubernetes
+email-validator==2.2.0
+    # via pydantic
 et-xmlfile==2.0.0
     # via openpyxl
 executing==2.2.0
@@ -141,6 +145,7 @@ humanfriendly==10.0
 idna==3.10
     # via
     #   anyio
+    #   email-validator
     #   httpx
     #   requests
     #   yarl
@@ -318,8 +323,9 @@ pyasn1-modules==0.4.1
     # via google-auth
 pycparser==2.22
     # via cffi
-pydantic==2.10.6
+pydantic[email]==2.10.6
     # via
+    #   -r requirements.in
     #   chromadb
     #   crewai
     #   fastapi

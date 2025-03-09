@@ -19,10 +19,10 @@ if ! command -v slim >/dev/null 2>&1; then
     exit 1
 fi
 
-slim build \
-    --include-shell \
-    --include-path /usr/local \
-    --include-path /home/appuser \
-    --include-path /usr/lib/x86_64-linux-gnu \
-    "$DOCKER_IMAGE_NAME":latest \
-    || exit
+#slim build \
+#    --include-shell \
+#    --include-path /usr/local \
+#    --include-path /home/appuser \
+#    --include-path /usr/lib/x86_64-linux-gnu \
+#    "$DOCKER_IMAGE_NAME":latest \
+#    || exit

@@ -1,4 +1,5 @@
 from crewai.flow import Flow, listen, start
+from loguru import logger
 
 from resume_opt.crews.for_ats_compliance.crew import \
     ResumeOptimizationForATSCompliance
@@ -16,6 +17,10 @@ class ResumeOptimizationFlow(Flow[ResumeOptimizationState]):
             self.state.resume_contents = inputs["resume_content"]
         if inputs and "job_posting" in inputs:
             self.state.job_posting_contents = inputs["job_posting"]
+
+        self.check_for_ats = False
+        if inputs and "choices" in inputs:
+            self.check_for_ats = inputs["choices"]["check_for_ats"] or False
 
     @start()
     def optimize_resume_for_job_posting(self) -> None:
@@ -35,6 +40,10 @@ class ResumeOptimizationFlow(Flow[ResumeOptimizationState]):
     @listen(optimize_resume_for_job_posting)
     def optimize_resume_for_ats_compliance(self) -> None:
         """Optimize resume for ATS compliance"""
+        if not self.check_for_ats:
+            logger.info("Skipping ATS compliance check")
+            return
+
         result = (
             ResumeOptimizationForATSCompliance()
             .crew()
@@ -46,9 +55,3 @@ class ResumeOptimizationFlow(Flow[ResumeOptimizationState]):
             )
         )
         self.state.resume_contents = result.raw
-
-
-# Example usage
-def kickoff(inputs=None):
-    flow = ResumeOptimizationFlow(inputs=inputs)
-    flow.kickoff()

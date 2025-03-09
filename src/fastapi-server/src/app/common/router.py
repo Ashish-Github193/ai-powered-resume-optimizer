@@ -36,8 +36,8 @@ async def upload_file(file: UploadFile = File(...)):
                 detail="Uploaded file is empty",
             )
 
-        async with aiofiles.open(file_path, "wb") as out_file:
-            await out_file.write(content)
+        async with aiofiles.open(file_path, "w") as out_file:
+            await out_file.write(str(content))
 
         return {
             "message": "File uploaded successfully",

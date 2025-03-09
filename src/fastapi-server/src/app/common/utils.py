@@ -11,11 +11,11 @@ def file_exists_in_uploads_folder(file_name: str):
 
 
 async def async_file_read(file_path: str):
-    async with aiofiles.open(file_path, "rb") as f:
+    async with aiofiles.open(file_path, "r") as f:
         content = await f.read()
     return content
 
 
-async def async_file_write(file_path: str, content: bytes):
-    async with aiofiles.open(file_path, "wb") as f:
+async def async_file_write(file_path: str, content: str):
+    async with aiofiles.open(file_path, "w") as f:
         await f.write(content)
