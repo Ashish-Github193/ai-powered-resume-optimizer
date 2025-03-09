@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PROJECT_NAME="resume-opt"
+PROJECT_NAME="crewai-server"
 DOCKER_IMAGE_NAME="$PROJECT_NAME"
 
 echo "Running: docker build \

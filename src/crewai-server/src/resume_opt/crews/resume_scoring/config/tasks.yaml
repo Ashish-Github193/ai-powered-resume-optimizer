@@ -1,0 +1,15 @@
+consistency_score_evaluation:
+  description: "Assess the consistency of the resume"
+  expected_output: "A score between 0 and 1 indicating the consistency of the resume. {resume_contents}"
+  agent: "resume_quality_evaluator"
+
+formatting_score_evaluation:
+  description: "Assess the formatting of the resume"
+  expected_output: "A score between 0 and 1 indicating the formatting of the resume. {resume_contents}"
+  agent: "resume_quality_evaluator"
+
+grammar_score_evaluation:
+  description: "Assess the grammar of the resume"
+  expected_output: "A score between 0 and 1 indicating the grammar of the resume. {resume_contents}"
+  agent: "resume_quality_evaluator"
+

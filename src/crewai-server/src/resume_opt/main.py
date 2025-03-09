@@ -2,7 +2,7 @@ from fastapi import Body, FastAPI, HTTPException
 from loguru import logger
 from starlette.status import HTTP_500_INTERNAL_SERVER_ERROR
 
-from resume_opt.flows.opt_flow import ResumeOptimizationFlow
+from resume_opt.flows.compiled_flow import ResumeOptimizationFlow
 from resume_opt.models import ResumeOptimizationRequest
 
 app = FastAPI(

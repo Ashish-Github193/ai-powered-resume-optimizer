@@ -1,7 +1,7 @@
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 
-from resume_opt.crews.area_for_imrpove.models import (Resume, ResumeScore,
+from resume_opt.crews.area_for_improve.models import (Resume,
                                                       ResumeSectionFeedback)
 
 
@@ -16,14 +16,6 @@ class FindAreasForImprovement:
         return Agent(
             config=self.agents_config["resume_structure_analyst"],  # type: ignore
             verbose=True,
-        )
-
-    @agent
-    def resume_quality_evaluator(self) -> Agent:
-        return Agent(
-            config=self.agents_config["resume_quality_evaluator"],  # type: ignore
-            verbose=True,
-            llm="o3-mini",
         )
 
     @agent
@@ -55,41 +47,6 @@ class FindAreasForImprovement:
         return Task(
             config=self.tasks_config["section_breakdown_task"],  # type: ignore
             output_pydantic=Resume,
-        )
-
-    @task
-    def overall_score_evaluation(self) -> Task:
-        return Task(
-            config=self.tasks_config["overall_score_evaluation"],  # type: ignore
-            output_pydantic=ResumeScore,
-        )
-
-    @task
-    def consistency_score_evaluation(self) -> Task:
-        return Task(
-            config=self.tasks_config["consistency_score_evaluation"],  # type: ignore
-            output_pydantic=ResumeScore,
-        )
-
-    @task
-    def formatting_score_evaluation(self) -> Task:
-        return Task(
-            config=self.tasks_config["formatting_score_evaluation"],  # type: ignore
-            output_pydantic=ResumeScore,
-        )
-
-    @task
-    def grammar_score_evaluation(self) -> Task:
-        return Task(
-            config=self.tasks_config["grammar_score_evaluation"],  # type: ignore
-            output_pydantic=ResumeScore,
-        )
-
-    @task
-    def resume_summary_evaluation(self) -> Task:
-        return Task(
-            config=self.tasks_config["resume_summary_evaluation"],  # type: ignore
-            output_pydantic=ResumeScore,
         )
 
     @task
@@ -126,56 +83,6 @@ class FindAreasForImprovement:
         return Crew(
             agents=[self.resume_structure_analyst()],
             tasks=[self.resume_section_breakdown()],
-            process=Process.sequential,
-            verbose=True,
-        )
-
-    @crew
-    def overall_score_crew(self) -> Crew:
-        """Creates the resume overall score crew"""
-        return Crew(
-            agents=[self.resume_quality_evaluator()],
-            tasks=[self.overall_score_evaluation()],
-            process=Process.sequential,
-            verbose=True,
-        )
-
-    @crew
-    def consistency_score_crew(self) -> Crew:
-        """Creates the resume consistency score crew"""
-        return Crew(
-            agents=[self.resume_quality_evaluator()],
-            tasks=[self.consistency_score_evaluation()],
-            process=Process.sequential,
-            verbose=True,
-        )
-
-    @crew
-    def formatting_score_crew(self) -> Crew:
-        """Creates the resume formatting score crew"""
-        return Crew(
-            agents=[self.resume_quality_evaluator()],
-            tasks=[self.formatting_score_evaluation()],
-            process=Process.sequential,
-            verbose=True,
-        )
-
-    @crew
-    def grammar_score_crew(self) -> Crew:
-        """Creates the resume grammar score crew"""
-        return Crew(
-            agents=[self.resume_quality_evaluator()],
-            tasks=[self.grammar_score_evaluation()],
-            process=Process.sequential,
-            verbose=True,
-        )
-
-    @crew
-    def resume_summary_crew(self) -> Crew:
-        """Creates the resume summary crew"""
-        return Crew(
-            agents=[self.summary_experience_assessor()],
-            tasks=[self.resume_summary_evaluation()],
             process=Process.sequential,
             verbose=True,
         )

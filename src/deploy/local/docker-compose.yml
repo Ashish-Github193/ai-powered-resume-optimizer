@@ -13,9 +13,8 @@ services:
     networks:
       - main-network
 
-
-  resume-opt-server:
-    image: resume-opt:latest
+  crewai-server:
+    image: crewai-server:latest
     restart: unless-stopped
     environment:
       SHARED_FOLDER: "${SHARED_FOLDER}"

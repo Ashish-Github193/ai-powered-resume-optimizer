@@ -1,13 +1,12 @@
 from datetime import date
 from typing import List, Optional
 
-from pydantic import (BaseModel, EmailStr, Field, HttpUrl, field_serializer,
-                      field_validator)
+from pydantic import BaseModel, EmailStr, Field, HttpUrl, field_serializer
 
 
 class ContactInfo(BaseModel):
-    name: str
-    email: EmailStr
+    name: Optional[str] = None
+    email: Optional[EmailStr] = None
     phone: Optional[str] = None
     linkedin: Optional[HttpUrl] = None
     github: Optional[HttpUrl] = None
@@ -22,14 +21,14 @@ class ContactInfo(BaseModel):
 
 
 class Summary(BaseModel):
-    text: str
+    text: Optional[str] = None
 
 
 class Experience(BaseModel):
-    job_title: str
-    company: str
+    job_title: Optional[str] = None
+    company: Optional[str] = None
     location: Optional[str] = None
-    start_date: date | str
+    start_date: Optional[str] = None
     end_date: Optional[date | str] = Field(
         None, description="None means currently working"
     )
@@ -37,21 +36,21 @@ class Experience(BaseModel):
 
 
 class Education(BaseModel):
-    degree: str
+    degree: Optional[str] = None
     field_of_study: Optional[str] = None
-    university: str
+    university: Optional[str] = None
     location: Optional[str] = None
-    start_date: date | str
-    end_date: Optional[date | str] = Field(
+    start_date: Optional[str] = None
+    end_date: Optional[str] = Field(
         None, description="None means currently studying"
     )
 
 
 class Certification(BaseModel):
-    name: str
-    issuing_organization: str
-    issue_date: Optional[date | str] = None
-    expiration_date: Optional[date | str] = None
+    name: Optional[str] = None
+    issuing_organization: Optional[str] = None
+    issue_date: Optional[str] = None
+    expiration_date: Optional[str] = None
     credential_id: Optional[str] = None
     credential_url: Optional[HttpUrl] = None
 
@@ -63,13 +62,13 @@ class Certification(BaseModel):
 
 
 class Skill(BaseModel):
-    name: str
+    name: Optional[str] = None
     level: Optional[str] = None  # Example: Beginner, Intermediate, Advanced
 
 
 class Project(BaseModel):
-    title: str
-    description: str
+    title: Optional[str] = None
+    description: Optional[str] = None
     technologies: List[str]
     link: Optional[HttpUrl] = None
 
@@ -81,22 +80,22 @@ class Project(BaseModel):
 
 
 class Award(BaseModel):
-    title: str
+    title: Optional[str] = None
     organization: Optional[str] = None
-    date_received: Optional[date] = None
+    date_received: Optional[str] = None
     description: Optional[str] = None
 
 
 class VolunteerExperience(BaseModel):
-    role: str
-    organization: str
-    start_date: date | str
-    end_date: Optional[date | str] = None
+    role: Optional[str] = None
+    organization: Optional[str] = None
+    start_date: Optional[str] = None
+    end_date: Optional[str] = None
     description: Optional[str] = None
 
 
 class Language(BaseModel):
-    name: str
+    name: Optional[str] = None
     proficiency: Optional[str] = None  # Example: Basic, Fluent, Native
 
 
@@ -132,21 +131,5 @@ class ResumeSectionFeedback(BaseModel):
     )
 
 
-class ResumeScore(BaseModel):
-    score: float = Field(
-        -1, description="Score of a section of resume between 0 and 1"
-    )
-
-    @field_validator("score")
-    def check_score_range(cls, v):
-        if v != -1 and (v < 0 or v > 1):
-            raise ValueError("Score must be between 0 and 1 or -1 for unset")
-        return v
-
-
 class ResumeAnalysisResult(BaseModel):
-    sections_feedback: List[str] = []  # Replace with ResumeSectionFeedback
-    overall_score: Optional[ResumeScore] = ResumeScore()
-    grammar_score: Optional[ResumeScore] = ResumeScore()
-    formatting_score: Optional[ResumeScore] = ResumeScore()
-    consistency_score: Optional[ResumeScore] = ResumeScore()
+    sections_feedback: List[str] = []
