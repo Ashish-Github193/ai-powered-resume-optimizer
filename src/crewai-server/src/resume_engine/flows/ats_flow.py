@@ -1,8 +1,13 @@
 from crewai.flow import Flow, start
+from pydantic import BaseModel
 
 from resume_engine.crews.for_ats_compliance.crew import \
     ResumeOptimizationForATSCompliance
-from resume_engine.models import ResumeOptimizationState
+
+
+class ResumeOptimizationState(BaseModel):
+    resume_contents: str = ""
+    job_posting_contents: str = ""
 
 
 class ResumeOptimizationForATSFlow(Flow[ResumeOptimizationState]):
