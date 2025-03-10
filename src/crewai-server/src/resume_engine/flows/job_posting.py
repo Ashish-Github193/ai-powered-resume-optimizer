@@ -20,10 +20,6 @@ class ResumeOptimizationForJobPostingFlow(Flow[ResumeOptimizationState]):
         if inputs and "job_posting" in inputs:
             self.state.job_posting_contents = inputs["job_posting"]
 
-        self.check_for_ats = False
-        if inputs and "choices" in inputs:
-            self.check_for_ats = inputs["choices"]["check_for_ats"] or False
-
     @start()
     async def optimize_resume_for_job_posting(self) -> None:
         """Optimize resume for job posting"""
