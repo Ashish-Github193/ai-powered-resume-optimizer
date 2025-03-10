@@ -1,9 +1,12 @@
-from fastapi import Body, FastAPI, HTTPException
-from loguru import logger
-from starlette.status import HTTP_500_INTERNAL_SERVER_ERROR
+from http import HTTPStatus
 
-from resume_engine.flows.compiled_flow import ResumeOptimizationFlow
-from resume_engine.server.models import ResumeOptimizationRequest
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.exceptions import RequestValidationError, ResponseValidationError
+from fastapi.responses import JSONResponse
+from loguru import logger
+from pydantic import ValidationError
+
+from resume_engine.server.aoi.router import router as aoi_router
 
 app = FastAPI(
     title="Resume Optimization API",
@@ -15,20 +18,28 @@ app = FastAPI(
     root_path="/api",
 )
 
+# Register the routers
+app.include_router(aoi_router)
 
-@app.post("/resumes/optimization")
-async def resume_optimization(data: ResumeOptimizationRequest = Body(...)):
-    try:
-        flow = ResumeOptimizationFlow(inputs=data.model_dump())
-        await flow.kickoff_async()
-        return {
-            "message": "success",
-            "content": {"resume": flow.state.resume_contents},
-            "error": None,
-        }
-    except Exception as e:
-        logger.error(f"Error while optimizing resume: {e}")
-        raise HTTPException(
-            status_code=HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Internal Server Error",
-        )
+
+# Define exception handlers
+@app.exception_handler(RequestValidationError)
+async def request_validation_exception_handler(
+    request: Request, exc: ValidationError
+) -> JSONResponse:
+    detail = exc.errors()[0]["msg"] if exc.errors() else "Validation Error"
+    logger.error(f"Validation error: {exc.errors()}")
+    raise HTTPException(
+        status_code=HTTPStatus.UNPROCESSABLE_ENTITY, detail=detail
+    )
+
+
+@app.exception_handler(ResponseValidationError)
+async def response_validation_exception_handler(
+    request: Request, exc: ValidationError
+) -> JSONResponse:
+    detail = exc.errors()[0]["msg"] if exc.errors() else "Validation Error"
+    logger.error(f"Validation error: {exc.errors()}")
+    raise HTTPException(
+        status_code=HTTPStatus.INTERNAL_SERVER_ERROR, detail=detail
+    )
