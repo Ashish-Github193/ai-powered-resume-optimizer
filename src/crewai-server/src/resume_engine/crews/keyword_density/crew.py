@@ -20,10 +20,23 @@ class ResumeOptimizationForKeywordDensity:
             verbose=True,
         )
 
+    @agent
+    def resume_length_maintainer(self) -> Agent:
+        return Agent(
+            config=self.agents_config["resume_length_maintainer"],  # type: ignore
+            verbose=True,
+        )
+
     @task
     def keyword_density_optimization(self) -> Task:
         return Task(
             config=self.tasks_config["keyword_density_optimization"],  # type: ignore
+        )
+
+    @task
+    def resume_length_maintain(self) -> Task:
+        return Task(
+            config=self.tasks_config["resume_length_maintain"],  # type: ignore
         )
 
     @crew

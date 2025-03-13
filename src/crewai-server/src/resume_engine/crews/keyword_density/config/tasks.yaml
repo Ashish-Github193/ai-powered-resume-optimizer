@@ -10,3 +10,8 @@ keyword_density_optimization:
     - **Additional Sections (Projects, Awards, Volunteer Work)**: Ideal 2-3%
   agent: "keyword_density_optimizer"
 
+resume_length_maintain:
+  description: "Ensure the resume maintains its original length while incorporating optimized keywords."
+  expected_output: "Integrate the keyword-optimized text into the resume without omitting any section or relevant information. Preserve the quality and structure of the resume. Return the resume in markdown format {resume_contents}"
+  agent: "resume_length_maintainer"
+
