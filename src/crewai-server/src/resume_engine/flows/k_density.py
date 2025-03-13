@@ -1,14 +1,11 @@
 import asyncio
 
-import litellm
 from crewai.flow import Flow, start
 from pydantic import BaseModel
 
 from resume_engine.crews.keyword_density.crew import \
     ResumeOptimizationForKeywordDensity
 from resume_engine.utils import read_file
-
-litellm._turn_on_debug()  # type: ignore
 
 
 class ResumeOptimizationState(BaseModel):
