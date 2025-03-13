@@ -4,3 +4,4 @@ loguru
 fastapi
 uvicorn
 pydantic[email]
+nltk

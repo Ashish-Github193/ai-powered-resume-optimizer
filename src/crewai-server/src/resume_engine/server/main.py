@@ -7,6 +7,10 @@ from loguru import logger
 from pydantic import ValidationError
 
 from resume_engine.server.aoi.router import router as aoi_router
+from resume_engine.server.ats.router import router as ats_router
+from resume_engine.server.job_posting.router import \
+    router as job_posting_router
+from resume_engine.server.scoring.router import router as scoring_router
 
 app = FastAPI(
     title="Resume Optimization API",
@@ -20,6 +24,9 @@ app = FastAPI(
 
 # Register the routers
 app.include_router(aoi_router)
+app.include_router(ats_router)
+app.include_router(job_posting_router)
+app.include_router(scoring_router)
 
 
 # Define exception handlers

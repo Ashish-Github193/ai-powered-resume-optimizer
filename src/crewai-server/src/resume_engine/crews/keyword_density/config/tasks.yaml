@@ -1,0 +1,12 @@
+keyword_density_optimization:
+  description: "Optimize the density of keywords in the resume by adjusting their frequency."
+  expected_output: |
+    Optimize the keyword density until it reaches the target density. Target density is specified below for each section:
+    
+    - **Header & Summary**: Ideal 3-4%  
+    - **Skills Section**: Ideal 4-6%  
+    - **Work Experience**: Ideal 2-3%  
+    - **Education & Certifications**: Ideal 2-3%  
+    - **Additional Sections (Projects, Awards, Volunteer Work)**: Ideal 2-3%
+  agent: "keyword_density_optimizer"
+
