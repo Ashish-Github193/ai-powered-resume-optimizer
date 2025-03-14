@@ -1,17 +1,48 @@
-keyword_density_optimization:
-  description: "Optimize the density of keywords in the resume by adjusting their frequency."
-  expected_output: |
-    Optimize the keyword density until it reaches the target density. Target density is specified below for each section:
-    
-    - **Header & Summary**: Ideal 3-4%  
-    - **Skills Section**: Ideal 4-6%  
-    - **Work Experience**: Ideal 2-3%  
-    - **Education & Certifications**: Ideal 2-3%  
-    - **Additional Sections (Projects, Awards, Volunteer Work)**: Ideal 2-3%
-  agent: "keyword_density_optimizer"
+divide_resume_into_sections:
+  description: >
+    Divide a resume into well-structured sections for clarity and organization {resume}.
+  expected_output: >
+    The divided resume sections.
+  agent: resume_section_divider
 
-resume_length_maintain:
-  description: "Ensure the resume maintains its original length while incorporating optimized keywords."
-  expected_output: "Integrate the keyword-optimized text into the resume without omitting any section or relevant information. Preserve the quality and structure of the resume. Return the resume in markdown format {resume_contents}"
-  agent: "resume_length_maintainer"
+header_and_summary_keyword_density_optimization:
+  description: >
+    Optimize keyword density in headers and summaries to improve visibility and impact {resume}.
+  expected_output: >
+    The optimized header and summary keywords.
+  agent: header_and_summary_keyword_density_optimizer
 
+skill_section_keyword_density_optimization:
+  description: >
+    Optimize keyword density in skills section to improve visibility and impact {resume}.
+  expected_output: >
+    The optimized skills keywords.
+  agent: skill_section_keyword_density_optimizer
+
+work_experience_keyword_density_optimization:
+  description: >
+    Optimize keyword density in work experience section to improve visibility and impact {resume}. 
+  expected_output: >
+    The optimized work experience keywords.
+  agent: work_experience_keyword_density_optimizer
+
+education_certifications_keyword_density_optimization:
+  description: >
+    Optimize keyword density in education and certifications section to improve visibility and impact {resume}.
+  expected_output: >
+    The optimized education and certifications keywords.
+  agent: education_certifications_keyword_density_optimizer
+
+additional_sections_keyword_density_optimization:
+  description: >
+    Optimize keyword density in additional sections like projects, awards, and volunteer work to improve visibility and impact {resume}.
+  expected_output: >
+    The optimized additional section keywords.
+  agent: additional_sections_keyword_density_optimizer
+
+resume_updatation:
+  description: >
+    Update the resume with the keyword optimized text and convert to markdown {resume} {resume_optimized_content}.
+  expected_output: >
+    The updated resume with the keyword optimized text in markdown format.
+  agent: resume_updater_agent

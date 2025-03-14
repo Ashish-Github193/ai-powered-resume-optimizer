@@ -5,7 +5,7 @@ from starlette.status import HTTP_500_INTERNAL_SERVER_ERROR
 from resume_engine.flows.ats_flow import ResumeOptimizationForATSFlow
 from resume_engine.server.models import ATSOptimizationRequest
 
-router = APIRouter(prefix="/ats", tags=["ATS Optimization"])
+router = APIRouter(prefix="/ats", tags=["Optimization"])
 
 
 @router.post("/optimize")

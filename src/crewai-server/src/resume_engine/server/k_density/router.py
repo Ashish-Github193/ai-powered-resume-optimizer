@@ -2,20 +2,22 @@ from fastapi import APIRouter, Body, HTTPException
 from loguru import logger
 from starlette.status import HTTP_500_INTERNAL_SERVER_ERROR
 
-from resume_engine.flows.job_posting import ResumeOptimizationForJobPostingFlow
-from resume_engine.server.models import JobPostingOptimizationRequest
+from resume_engine.flows.k_density import KeywordDensityFlow
+from resume_engine.server.models import KeywordDensityOptimizationRequest
 
-router = APIRouter(prefix="/job-posting", tags=["Optimization"])
+router = APIRouter(prefix="/k-density", tags=["Optimization"])
 
 
 @router.post("/optimize")
-async def resume_optimization(data: JobPostingOptimizationRequest = Body(...)):
+async def resume_optimization(
+    data: KeywordDensityOptimizationRequest = Body(...),
+):
     try:
-        flow = ResumeOptimizationForJobPostingFlow(inputs=data.model_dump())
-        await flow.kickoff_async()
+        flow = KeywordDensityFlow(inputs=data.model_dump())
+        await flow.kickoff_async(inputs={"resume": data.resume_content})
         return {
             "message": "success",
-            "content": {"resume": flow.state.resume_contents},
+            "content": {"resume": flow.state.resume_result},
             "error": None,
         }
     except Exception as e:

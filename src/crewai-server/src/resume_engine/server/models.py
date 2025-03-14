@@ -16,3 +16,7 @@ class AOIRequest(BaseModel):
 
 class ScoringRequest(BaseModel):
     resume_content: str
+
+
+class KeywordDensityOptimizationRequest(BaseModel):
+    resume_content: str

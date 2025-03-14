@@ -5,10 +5,10 @@ from starlette.status import HTTP_500_INTERNAL_SERVER_ERROR
 from resume_engine.flows.aoi_flow import ResumeAOIFlow
 from resume_engine.server.models import AOIRequest
 
-router = APIRouter(prefix="/aoi", tags=["Area of Improvement"])
+router = APIRouter(prefix="/aoi", tags=["Suggestion"])
 
 
-@router.post("/find")
+@router.post("/suggest")
 async def resume_optimization(data: AOIRequest = Body(...)):
     try:
         flow = ResumeAOIFlow(inputs=data.model_dump())

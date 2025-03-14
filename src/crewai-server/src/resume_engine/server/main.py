@@ -10,6 +10,7 @@ from resume_engine.server.aoi.router import router as aoi_router
 from resume_engine.server.ats.router import router as ats_router
 from resume_engine.server.job_posting.router import \
     router as job_posting_router
+from resume_engine.server.k_density.router import router as k_density_router
 from resume_engine.server.scoring.router import router as scoring_router
 
 app = FastAPI(
@@ -27,6 +28,7 @@ app.include_router(aoi_router)
 app.include_router(ats_router)
 app.include_router(job_posting_router)
 app.include_router(scoring_router)
+app.include_router(k_density_router)
 
 
 # Define exception handlers
